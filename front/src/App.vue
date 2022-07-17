@@ -11,7 +11,7 @@
           active-color="white"
           class="text-grey-5"
         >
-          <q-route-tab name="home" label="Accueil" to="Home" />
+          <q-route-tab name="home" label="Accueil" to="/" />
           <q-route-tab name="infos" label="Informations" to="Infos" />
         </q-tabs>
       </q-toolbar>
