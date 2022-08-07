@@ -10,9 +10,12 @@
           indicator-color="transparent"
           active-color="white"
           class="text-grey-5"
+          v-model="activeTab"
+          @click="goTo()"
         >
-          <q-route-tab name="home" label="Accueil" to="/" />
-          <q-route-tab name="infos" label="Informations" to="Infos" />
+          <q-tab name="home" label="Accueil" />
+          <q-tab name="schedule" label="Déroulé" />
+          <q-tab name="parking" label="Se garer" />
         </q-tabs>
       </q-toolbar>
     </q-header>
@@ -31,6 +34,22 @@ export default {
 
   components: {
     
+  },
+
+  methods: {
+    goTo() {
+      document.getElementById(this.activeTab).scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "start"
+      });
+    }
+  },
+
+  data() {
+    return {
+      activeTab: "home"
+    }
   },
 
   setup () {

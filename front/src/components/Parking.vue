@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div id="parking" class="q-pa-md">
     <h1 class="text-center">O&ugrave; se garer ?</h1>
     <section>
         <h3>Parkings relais + Tram</h3>

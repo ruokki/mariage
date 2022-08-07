@@ -1,8 +1,8 @@
 <template>
-  <div class="q-pa-md">
-    <Parking />
+  <div id="home" class="q-pa-md">
     <Timer />
     <Schedule />
+    <Parking />
   </div>
 </template>
 

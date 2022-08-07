@@ -1,10 +1,7 @@
 <template>
-  <div class="q-pa-md">
+  <div id="schedule" class="q-pa-md">
+    <h1 class="text-center">Déroulé de la journée</h1>
     <q-timeline color="secondary">
-        <q-timeline-entry heading class="text-center">
-            Déroulé de la journée
-        </q-timeline-entry>
-
       <q-timeline-entry
         subtitle="14h00"
       >
