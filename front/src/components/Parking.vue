@@ -7,7 +7,7 @@
             Le réseau de transports en commun de Clermont-Ferrand est gratuit le week-end et les jours fériés. Les parkings relais et de proximité sont donc tous gratuit.
             Le station de tram desservant la mairie de Clermont-Ferrand est l'arrêt "Hôtel de ville".
         </p>
-        <p>Nous vous encourageons fortement à privilégier cette solution.</p>
+        <p>Nous vous encourageons fortement à privilégier cette solution. Elle est à la fois plus économique et plus écologique !</p>
         <div class="row">
             <div class="col">
                 <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1TPprSYwCjRVckl-SxvMMEgsa0fogx3o&ehbc=2E312F" :width="iframe" height="480"></iframe>
@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <p class="text-h6 text-center">Direction La Pardieu - Gare</p>
+                <p class="text-h6 text-center">Direction Les Vergnes</p>
                 <q-list>
                     <q-item v-for="(item, index) in pardieu.values">
                         <q-item-section avatar>
@@ -29,7 +29,7 @@
                 </q-list>
             </div>
             <div class="col">
-                <p class="text-h6 text-center">Direction Les Vergnes</p>
+                <p class="text-h6 text-center">Direction La Pardieu - Gare</p>
                 <q-list>
                     <q-item v-for="(item, index) in vergnes.values">
                         <q-item-section avatar>
