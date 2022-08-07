@@ -5,12 +5,12 @@
         <h3>Parkings relais + Tram</h3>
         <p>
             Le réseau de transports en commun de Clermont-Ferrand est gratuit le week-end et les jours fériés. Les parkings relais et de proximité sont donc tous gratuit.
-            Le station de tram desservant la mairie de Clermont-Ferrand est l'arrêt "Hôtel de ville".
+            La station de tram desservant la mairie de Clermont-Ferrand est l'arrêt "Hôtel de ville".
         </p>
         <p>Nous vous encourageons fortement à privilégier cette solution. Elle est à la fois plus économique et plus écologique !</p>
         <div class="row">
             <div class="col">
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1TPprSYwCjRVckl-SxvMMEgsa0fogx3o&ehbc=2E312F" :width="iframe" height="480"></iframe>
+                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1TPprSYwCjRVckl-SxvMMEgsa0fogx3o&ehbc=2E312F" :width="iframe" :height="heightIframe"></iframe>
             </div>
         </div>
         <div class="row">
@@ -48,12 +48,12 @@
       <h3>Parkings autour de la Mairie et de l'église</h3>
       <div ref="mapContainer" class="row">
         <div class="col">
-          <iframe src="https://www.google.com/maps/d/u/0/embed?mid=15X2bPnMotmziUOHqkCDrJzeuQNBF7C4&ehbc=2E312F" :width="iframe" height="480"></iframe>
+          <iframe src="https://www.google.com/maps/d/u/0/embed?mid=15X2bPnMotmziUOHqkCDrJzeuQNBF7C4&ehbc=2E312F" :width="iframe" :height="heightIframe"></iframe>
         </div>
       </div>
       <div class="row">
         <div class="col">
-            <p class="text-h6 text-center">Parking en surface</p>
+            <p class="text-h6 text-center">Parkings en surface</p>
           <q-list>
             <q-item v-for="(item, index) in surface.values">
                 <q-item-section avatar>
@@ -68,7 +68,7 @@
           <p class="text-caption">Il est possible de payer le stationnement de surface via l'application PrestoPark</p>
         </div>
         <div class="col">
-            <p class="text-h6 text-center">Parking en surface</p>
+            <p class="text-h6 text-center">Parkings souterrains</p>
             <q-list>
                 <q-item v-for="(item, index) in underground.values">
                     <q-item-section avatar>
@@ -82,7 +82,15 @@
             </q-list>
         </div>
       </div>
+    </section>
+    <section>
       <h3>Réception</h3>
+      <p>La salle "L'Astragale" dispose de son parking de plus de 200 places. Il n'y aura pas à chercher de place !</p>
+      <div class="row">
+        <div class="col">
+            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=14tAGZbzTaicC_R-rRapgf5DXS2gF0VA&ehbc=2E312F" :width="iframe" :height="heightIframe"></iframe>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -100,6 +108,7 @@ export default {
   data() {
     return {
         iframe: 0,
+        heightIframe: 480,
         size: "md",
         pardieu: {
             color: "blue-10",
