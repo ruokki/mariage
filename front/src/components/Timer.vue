@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md">
+    <h1 class="text-center">15 JUILLET 2021</h1>
     <div class="row">
       <div class="col" ref="myCol">
         <q-circular-progress

@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-timeline color="secondary">
         <q-timeline-entry heading class="text-center">
-            La journée du 15 Juillet 2023
+            Déroulé de la journée
         </q-timeline-entry>
 
       <q-timeline-entry
