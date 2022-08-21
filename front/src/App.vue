@@ -10,7 +10,7 @@
           indicator-color="transparent"
           active-color="white"
           class="text-grey-5"
-          v-model="activeTab"
+          v-model="tab"
           @click="goTo()"
         >
           <q-tab name="home" label="Accueil" />
@@ -38,6 +38,11 @@ export default {
 
   methods: {
     goTo() {
+      if(this.$route.name === "invite") {
+         this.$router.push('/');
+         return;
+      }
+
       document.getElementById(this.activeTab).scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -45,10 +50,28 @@ export default {
       });
     }
   },
-
+  computed: {
+    activeTab() {
+      return this.$route.name == "invite" ? "" : this.tab;
+    }
+  },
   data() {
     return {
-      activeTab: "home"
+      menu: [
+        {
+          name: "home",
+          label: "Accueil"
+        },
+        {
+          name: "schedule",
+          label: "Déroulé"
+        },
+        {
+          name: "parking",
+          label: "Se garer"
+        },
+      ],
+      tab: "home"
     }
   },
 
