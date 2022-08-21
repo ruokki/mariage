@@ -10,12 +10,10 @@
           indicator-color="transparent"
           active-color="white"
           class="text-grey-5"
-          v-model="tab"
+          v-model="activeTab"
           @click="goTo()"
         >
-          <q-tab name="home" label="Accueil" />
-          <q-tab name="schedule" label="Déroulé" />
-          <q-tab name="parking" label="Se garer" />
+          <q-tab v-for="item in menu" :name="item.name" :label="item.label" @click="tab = item.name" />
         </q-tabs>
       </q-toolbar>
     </q-header>
