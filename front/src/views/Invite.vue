@@ -55,7 +55,10 @@
             </div>
             </p>
             <div :class="classSpace">
-                <q-btn-group spread>
+                <q-btn-group spread v-if="edited != -1">
+                    <q-btn :color="colorUI" label="Modifier" @click="addOne" icon="edit" />
+                </q-btn-group>
+                <q-btn-group spread v-else>
                     <q-btn :color="colorUI" label="Ajouter un invité" @click="addOne" icon="add" />
                     <q-btn :color="colorUI" label="Terminer et envoyer" icon="email" />
                 </q-btn-group>
@@ -71,10 +74,10 @@
                         <q-td key="allergie" :props="props">{{ props.row.allergie }}</q-td>
                         <q-td key="pmr" :props="props">{{ formatPMR(props.row.pmr) }}</q-td>
                         <q-td key="action" :props="props">
-                            <q-btn round class="q-mr-sm" size="sm" :color="colorUI" icon="edit">
+                            <q-btn round class="q-mr-sm" size="sm" :color="colorUI" icon="edit" @click="editInvite(props.rowIndex)">
                                 <q-tooltip anchor="center left" self="center right" >Modifier</q-tooltip>
                             </q-btn>
-                            <q-btn round size="sm" :color="colorUI" icon="delete" >
+                            <q-btn round size="sm" :color="colorUI" icon="delete" @click="deleteInvite(props.rowIndex)" >
                                 <q-tooltip anchor="center left" self="center right" >Supprimer</q-tooltip>
                             </q-btn>
                         </q-td>
@@ -94,7 +97,13 @@ export default {
     },
     methods: {
         addOne() {
-            this.listeInvite.push(this.invite);
+            if(this.edited == -1) {
+                this.listeInvite.push(this.invite);
+            }
+            else {
+                this.listeInvite[this.edited] = this.invite;
+                this.edited = -1;
+            }
             this.initInvite();
         },
         initInvite() {
@@ -115,7 +124,14 @@ export default {
         },
         formatPMR(val) {
             return val ? "Oui" : "Non";
-        }
+        },
+        editInvite(idx) {
+            this.edited = idx;
+            this.invite = this.listeInvite[idx];
+        },
+        deleteInvite(idx) {
+            this.listeInvite.splice(idx, 1);
+        },
     },
     computed: {
         fullClass() {
@@ -199,7 +215,8 @@ export default {
                     allergie: "les oignons, les poivrons",
                     pmr: true
                 },
-            ]
+            ],
+            edited: -1
         }
     },
     mounted() {
