@@ -55,7 +55,7 @@
             </div>
             </p>
             <div :class="classSpace">
-                <q-btn-group spread v-if="edited != -1">
+                <q-btn-group spread v-if="modifying !== null">
                     <q-btn :color="colorUI" label="Modifier" @click="addOne" icon="edit" />
                 </q-btn-group>
                 <q-btn-group spread v-else>
@@ -97,12 +97,11 @@ export default {
     },
     methods: {
         addOne() {
-            if(this.edited == -1) {
+            if(this.modifying == null) {
                 this.listeInvite.push(this.invite);
             }
             else {
-                this.listeInvite[this.edited] = this.invite;
-                this.edited = -1;
+                this.modifying = null;
             }
             this.initInvite();
         },
@@ -126,8 +125,8 @@ export default {
             return val ? "Oui" : "Non";
         },
         editInvite(idx) {
-            this.edited = idx;
             this.invite = this.listeInvite[idx];
+            this.modifying = this.listeInvite[idx];
         },
         deleteInvite(idx) {
             this.listeInvite.splice(idx, 1);
@@ -216,7 +215,7 @@ export default {
                     pmr: true
                 },
             ],
-            edited: -1
+            modifying: null
         }
     },
     mounted() {
