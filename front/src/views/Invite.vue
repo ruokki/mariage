@@ -64,7 +64,7 @@
                 </q-btn-group>
             </div>
             <q-table title="Invités déjà saisis" dense :class="fullClass" :rows="listeInvite" :columns="columnInvite"
-                row-key="name" hide-bottom>
+                row-key="name" hide-bottom :pagination="pagination">
                 <template v-slot:body="props">
                     <q-tr :props="props">
                         <q-td key="size" :props="props">{{ formatSize(props.row.size) }}</q-td>
@@ -188,6 +188,9 @@ export default {
                     field: "",
                 },
             ],
+            pagination: {
+                rowsPerPage: 40
+            },
             regimeValues: [
                 { label: 'Omnivore', value: 'omni' },
                 { label: 'Végétarien', value: 'vege' },
