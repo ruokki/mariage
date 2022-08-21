@@ -64,6 +64,14 @@
                 />
             </div>
         </p>
+        <div class="row" v-if="showAllergie">
+            <div class="col q-pa-xs">
+                <q-input
+                    v-model="invite.allergie"
+                    type="textarea"
+                />
+            </div>
+        </div>
         <p :class="fullClass + ' row'">
             <div class="col">
                 Personne à mobilité réduite ?
@@ -83,14 +91,6 @@
                 />
             </div>
         </p>
-        <div class="row" v-if="showAllergie">
-            <div class="col q-pa-xs">
-                <q-input
-                    v-model="invite.allergie"
-                    type="textarea"
-                />
-            </div>
-        </div>
         <div :class="classSpace">
             <q-btn-group spread>
                 <q-btn :color="colorUI" label="Ajouter un invité" @click="addOne" icon="add" />
