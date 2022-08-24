@@ -114,6 +114,7 @@ export default {
                 allergie: "",
                 pmr: false
             };
+            this.showAllergie = false;
         },
         formatSize(val) {
             return this.sizeValues.find(elem => elem.value == val).label
