@@ -65,6 +65,10 @@ export default {
           label: "Déroulé"
         },
         {
+          name: "sleep",
+          label: "Se loger"
+        },
+        {
           name: "parking",
           label: "Se garer"
         },
