@@ -2,12 +2,6 @@
   <div id="sleep" class="q-pa-md">
     <h1 class="text-center">O&ugrave; dormir ?</h1>
     <section>
-        <h3>Parkings relais + Tram</h3>
-        <p>
-            Le réseau de transports en commun de Clermont-Ferrand est gratuit le week-end et les jours fériés. Les parkings relais et de proximité sont donc tous gratuit.
-            La station de tram desservant la mairie de Clermont-Ferrand est l'arrêt "Hôtel de ville".
-        </p>
-        <p>Nous vous encourageons fortement à privilégier cette solution. Elle est à la fois plus économique et plus écologique !</p>
         <div ref="mapContainer" class="row">
             <div class="col">
                 <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1qNPyRP338nC95sAvpfHpX8lGgwxqpbI&ehbc=2E312F" :width="iframe" :height="heightIframe"></iframe>
