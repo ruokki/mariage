@@ -60,7 +60,7 @@
                 </q-btn-group>
                 <q-btn-group spread v-else>
                     <q-btn :color="colorUI" label="Ajouter un invité" @click="addOne" icon="add" />
-                    <q-btn :color="colorUI" label="Terminer et envoyer" icon="email" />
+                    <q-btn :color="colorUI" label="Terminer et envoyer" @click="send" icon="email" />
                 </q-btn-group>
             </div>
             <q-table title="Invités déjà saisis" dense :class="fullClass" :rows="listeInvite" :columns="columnInvite"
@@ -90,6 +90,7 @@
 
 <script>
 import { ref } from "vue";
+import axios from 'axios';
 
 export default {
     name: "Invite",
@@ -132,6 +133,16 @@ export default {
         deleteInvite(idx) {
             this.listeInvite.splice(idx, 1);
         },
+        send() {
+            axios.post("http://localhost/dev/mariage/back/public/", {
+                cmd: "new",
+                invites: this.listeInvite
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(() => {});
+        }
     },
     computed: {
         fullClass() {

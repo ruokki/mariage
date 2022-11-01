@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "axios": "^1.1.3",
     "quasar": "^2.0.0",
     "vue": "^3.2.13",
+    "vue-axios": "^3.5.1",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
