@@ -4,6 +4,7 @@
     <Schedule />
     <Sleep />
     <Parking />
+    <Invite />
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import Timer from "../components/Timer.vue"
 import Schedule from "../components/Schedule.vue"
 import Parking from "../components/Parking.vue"
 import Sleep from "../components/Sleep.vue"
+import Invite from "../components/Invite.vue"
 
 export default {
   name: "Home",
@@ -20,7 +22,8 @@ export default {
     Timer,
     Schedule,
     Parking,
-    Sleep
+    Sleep,
+    Invite
   },
 };
 </script>

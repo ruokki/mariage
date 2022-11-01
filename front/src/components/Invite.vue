@@ -1,21 +1,19 @@
 <template>
     <div id="invite" class="q-pa-md">
+        <h1 class="text-center">Je viens !</h1>
         <q-form>
-            <p :class="textClass + ' row'">
-            <div class="col">
-                Qui sera là ?
-            </div>
-            <div class="col">
-                <q-btn-toggle v-model="invite.size" spread no-caps :toggle-color="colorUI" color="white"
-                    text-color="black" :options="sizeValues" />
-            </div>
-            </p>
             <div class="row">
                 <div class="col q-pa-xs">
                     <q-input v-model="invite.nom" label="Nom" />
                 </div>
                 <div class="col q-pa-xs">
                     <q-input v-model="invite.prenom" label="Prénom" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col q-pa-xs">
+                    <q-btn-toggle v-model="invite.size" spread no-caps :toggle-color="colorUI" color="white"
+                    text-color="black" :options="sizeValues" />
                 </div>
             </div>
             <p :class="fullClass">Quel est son régime alimentaire ?</p>
@@ -60,10 +58,9 @@
                 </q-btn-group>
                 <q-btn-group spread v-else>
                     <q-btn :color="colorUI" label="Ajouter un invité" @click="addOne" icon="add" />
-                    <q-btn :color="colorUI" label="Terminer et envoyer" @click="send" icon="email" />
                 </q-btn-group>
             </div>
-            <q-table title="Invités déjà saisis" dense :class="fullClass" :rows="listeInvite" :columns="columnInvite"
+            <q-table title="On vient :" dense :class="fullClass" :rows="listeInvite" :columns="columnInvite"
                 row-key="name" hide-bottom :pagination="pagination">
                 <template v-slot:body="props">
                     <q-tr :props="props">
@@ -84,7 +81,24 @@
                     </q-tr>
                 </template>
             </q-table>
+            <q-btn-group :class="fullClass + ' row'" spread>
+                <q-btn :color="colorUI" label="Terminer et envoyer" @click="send" icon="email" />
+            </q-btn-group>
         </q-form>
+
+        <q-dialog v-model="confirm" persistent>
+            <q-card>
+                <q-card-section class="row items-center">
+                <q-avatar icon="question_mark" color="primary" text-color="white" />
+                <span class="q-ml-sm">Est ce qu'on ajoute {{invite.prenom}} {{invite.nom}} à la liste des invités ?</span>
+                </q-card-section>
+
+                <q-card-actions align="right">
+                <q-btn flat label="Non" color="primary" @click="send(true)" v-close-popup />
+                <q-btn flat label="Oui" color="primary" @click="addAndSend" v-close-popup />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
 
@@ -133,15 +147,31 @@ export default {
         deleteInvite(idx) {
             this.listeInvite.splice(idx, 1);
         },
-        send() {
-            axios.post("http://localhost/dev/mariage/back/public/", {
+        addAndSend() {
+            this.addOne();
+            this.send();
+        },
+        send(reinit = false) {
+            if(reinit == true) {
+                this.initInvite();
+            }
+
+            if(this.modifying != null) {
+                this.addOne();
+            }
+
+            if(this.invite.nom !== "" || this.invite.prenom !== "") {
+                this.confirm = true;
+            }
+
+            /*axios.post("http://localhost/dev/mariage/back/public/", {
                 cmd: "new",
                 invites: this.listeInvite
             })
             .then(data => {
                 console.log(data);
             })
-            .catch(() => {});
+            .catch(() => {});*/
         }
     },
     computed: {
@@ -212,25 +242,9 @@ export default {
                 { label: "Adulte", value: "adulte" },
                 { label: "Enfant", value: "child" },
             ],
-            listeInvite: [
-                {
-                    nom: "Derodit",
-                    prenom: "Thibaut",
-                    size: "adulte",
-                    regime: "omni",
-                    allergie: "les bananes",
-                    pmr: false
-                },
-                {
-                    nom: "Bellanger",
-                    prenom: "Pauline",
-                    size: "adulte",
-                    regime: "vege",
-                    allergie: "les oignons, les poivrons",
-                    pmr: true
-                },
-            ],
-            modifying: null
+            listeInvite: [],
+            modifying: null,
+            confirm: false
         }
     },
     mounted() {

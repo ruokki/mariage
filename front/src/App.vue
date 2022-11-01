@@ -72,6 +72,10 @@ export default {
           name: "parking",
           label: "Se garer"
         },
+        {
+          name: "invite",
+          label: "Je viens !"
+        },
       ],
       tab: "home"
     }
