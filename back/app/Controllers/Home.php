@@ -15,21 +15,15 @@ class Home extends BaseController
         if($this->request->isAJAX()) {
             $cmd = $this->request->getPost('cmd');
             if($cmd == 'add') {
-                var_dump('test');
+                helper('filesystem');
+                $invites = $this->request->getPost('invites');
+                foreach($invites as $one) {
+                    write_file('./invites.csv', implode('|', $one));
+                }
             }
         }
         else {
-
+            return view('test');
         }
-    }
-
-    /**
-     * Fonction de création de la base de données
-     */
-    public function buildDB() {
-
-        $model = model(ForgeModel::class);
-        $result = $model->ForgeDB();
-        return view('db_ok', [ 'db' => $result]);
     }
 }
