@@ -46,7 +46,7 @@ class Home extends BaseController
             }
         }
         else {
-            return view('test');
+            return view('Site/root');
         }
     }
 }
