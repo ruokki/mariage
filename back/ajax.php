@@ -1,10 +1,11 @@
 <?php
+$post = file_get_contents("php://input");
+$post = json_decode($post, TRUE);
 
-if(count($_POST) > 0) {
+if(count($post) > 0) {
     $separator = '|';
-    $file = './invites.csv';
-    helper('filesystem');
-    
+    $file = './result/invites.csv';
+
     // Fichier inexistant, création de l'en-tête
     if(!file_exists($file)) {
         file_put_contents($file, implode($separator, [
@@ -17,7 +18,7 @@ if(count($_POST) > 0) {
         ]) . PHP_EOL, FILE_APPEND);
     }
     
-    $invites = $_POST['invites'];
+    $invites = $post['invites'];
     foreach($invites as $one) {
         $text = [
             $one['nom'],

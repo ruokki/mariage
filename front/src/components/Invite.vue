@@ -198,16 +198,15 @@ export default {
                 this.emptyInvite = true;
             }
             else {
-                this.alertPositive = true;
                 var thos = this;
-                /*axios.post("./ajax.php", {
+                axios.post("./ajax.php", {
                     cmd: "new",
                     invites: this.listeInvite
                 })
                 .then(data => {
                     thos.alertPositive = true;
                 })
-                .catch(() => {});*/
+                .catch(() => {});
             }
         },
         clearInvite() {
