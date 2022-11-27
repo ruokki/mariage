@@ -1,13 +1,13 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header>
+    <q-header class="bg-blue-10">
       <q-toolbar>
         <q-toolbar-title>
           Pauline et Thibaut
         </q-toolbar-title>
         <q-tabs
           shrink
-          indicator-color="transparent"
+          indicator-color="yellow-14"
           active-color="white"
           class="text-grey-5"
           v-model="activeTab"
@@ -71,6 +71,10 @@ export default {
         {
           name: "parking",
           label: "Se garer"
+        },
+        {
+          name: "contact",
+          label: "Nous Contacter"
         },
         {
           name: "invite",

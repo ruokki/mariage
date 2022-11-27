@@ -3,11 +3,11 @@
     <h1 class="text-center">O&ugrave; se garer ?</h1>
     <section>
         <h3>Parkings relais + Tram</h3>
-        <p>
+        <p  class="text-body1">
             Le réseau de transports en commun de Clermont-Ferrand est gratuit le week-end et les jours fériés. Les parkings relais et de proximité sont donc tous gratuit.
             La station de tram desservant la mairie de Clermont-Ferrand est l'arrêt "Hôtel de ville".
         </p>
-        <p>Nous vous encourageons fortement à privilégier cette solution. Elle est à la fois plus économique et plus écologique !</p>
+        <p class="text-body1">Nous vous encourageons à privilégier cette solution. Elle est à la fois plus économique et plus écologique !</p>
         <div class="row">
             <div class="col">
                 <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1TPprSYwCjRVckl-SxvMMEgsa0fogx3o&ehbc=2E312F" :width="iframe" :height="heightIframe"></iframe>
@@ -85,7 +85,7 @@
     </section>
     <section>
       <h3>Réception</h3>
-      <p>La salle "L'Astragale" dispose de son parking de plus de 200 places. Il n'y aura pas à chercher de place !</p>
+      <p class="text-body1">La salle "L'Astragale" dispose de son parking de plus de 200 places. Il n'y aura pas à chercher de place !</p>
       <div class="row">
         <div class="col">
             <iframe src="https://www.google.com/maps/d/u/0/embed?mid=14tAGZbzTaicC_R-rRapgf5DXS2gF0VA&ehbc=2E312F" :width="iframe" :height="heightIframe"></iframe>

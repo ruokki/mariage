@@ -99,12 +99,40 @@
                 </q-card-actions>
             </q-card>
         </q-dialog>
+        <q-dialog v-model="alertPositive" persistent @hide="clearInvite()">
+            <q-card>
+                <q-card-section>
+                <div class="text-h6">Participation enregistrée !</div>
+                </q-card-section>
+                <q-card-section class="q-pt-none">
+                    <p>Votre présence a bien été enregistrée !</p>
+                    <p>En cas d'annulation, n'hésite pas à nous prévenir au 06.29.57.46.72 (Pauline) ou au 06.30.40.49.09 (Thibaut). </p>
+                    <p>On ne t'en voudra pas ! (enfin pas trop)</p>
+                </q-card-section>
+                <q-card-actions align="right">
+                <q-btn flat label="OK" color="primary" v-close-popup />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
+        <q-dialog v-model="emptyInvite" persistent>
+            <q-card>
+                <q-card-section>
+                <div class="text-h6">Il n'y a personne !</div>
+                </q-card-section>
+                <q-card-section class="q-pt-none">
+                    <p>Aucun invité n'a été saisi !</p>
+                </q-card-section>
+                <q-card-actions align="right">
+                <q-btn flat label="OK" color="primary" v-close-popup />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
-
 <script>
 import { ref } from "vue";
 import axios from 'axios';
+import { useQuasar } from 'quasar';
 
 export default {
     name: "Invite",
@@ -164,14 +192,25 @@ export default {
                 this.confirm = true;
             }
 
-            /*axios.post("http://localhost/dev/mariage/back/public/", {
-                cmd: "new",
-                invites: this.listeInvite
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(() => {});*/
+            if(this.listeInvite.length == 0) {
+                this.emptyInvite = true;
+            }
+            else {
+                this.alertPositive = true;
+                var thos = this;
+                /*axios.post("./ajax.php", {
+                    cmd: "new",
+                    invites: this.listeInvite
+                })
+                .then(data => {
+                    thos.alertPositive = true;
+                })
+                .catch(() => {});*/
+            }
+        },
+        clearInvite() {
+            this.listeInvite = [];
+            this.initInvite();
         }
     },
     computed: {
@@ -181,6 +220,8 @@ export default {
     },
     data() {
         return {
+            alertPositive: false,
+            emptyInvite: false,
             colorUI: "primary",
             textClass: "text-h5",
             classSpace: "q-mt-md",

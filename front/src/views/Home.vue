@@ -1,9 +1,10 @@
 <template>
-  <div id="home" class="q-pa-md">
+  <div id="home" class="q-pa-md bg-grey-3">
     <Timer />
     <Schedule />
     <Sleep />
     <Parking />
+    <Contact />
     <Invite />
   </div>
 </template>
@@ -15,6 +16,7 @@ import Schedule from "../components/Schedule.vue"
 import Parking from "../components/Parking.vue"
 import Sleep from "../components/Sleep.vue"
 import Invite from "../components/Invite.vue"
+import Contact from "../components/Contact.vue"
 
 export default {
   name: "Home",
@@ -23,7 +25,8 @@ export default {
     Schedule,
     Parking,
     Sleep,
-    Invite
+    Invite,
+    Contact
   },
 };
 </script>
