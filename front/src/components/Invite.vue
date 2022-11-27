@@ -180,16 +180,17 @@ export default {
             this.send();
         },
         send(reinit = false) {
+            if(this.invite.nom !== "" || this.invite.prenom !== "") {
+                this.confirm = true;
+                return;
+            }
+
             if(reinit == true) {
                 this.initInvite();
             }
 
             if(this.modifying != null) {
                 this.addOne();
-            }
-
-            if(this.invite.nom !== "" || this.invite.prenom !== "") {
-                this.confirm = true;
             }
 
             if(this.listeInvite.length == 0) {
@@ -222,7 +223,7 @@ export default {
         return {
             alertPositive: false,
             emptyInvite: false,
-            colorUI: "primary",
+            colorUI: "blue-10",
             textClass: "text-h5",
             classSpace: "q-mt-md",
             showAllergie: false,
