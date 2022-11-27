@@ -7,10 +7,11 @@
           :value="month"
           :size="cardSize"
           show-value
-          :thickness="0.22"
-          color="grey-9"
+          :thickness="thick"
+          :color="color"
+          :center-color="center"
+          :track-color="track"
           :square="true"
-          track-color="light-blue"
           class="q-ma-md"
           :bordered="false"
           :min="0"
@@ -23,10 +24,11 @@
           :value="days"
           :size="cardSize"
           show-value
-          :thickness="0.22"
-          color="grey-9"
+          :thickness="thick"
           :square="true"
-          track-color="light-blue"
+          :color="color"
+          :center-color="center"
+          :track-color="track"
           class="q-ma-md"
           :bordered="false"
           :min="0"
@@ -39,10 +41,11 @@
           :value="hours"
           :size="cardSize"
           show-value
-          :thickness="0.22"
-          color="grey-9"
+          :thickness="thick"
+          :color="color"
+          :center-color="center"
+          :track-color="track"
           :square="true"
-          track-color="light-blue"
           class="q-ma-md"
           :bordered="false"
           :min="0"
@@ -55,10 +58,11 @@
           :value="minutes"
           :size="cardSize"
           show-value
-          :thickness="0.22"
-          color="grey-9"
+          :thickness="thick"
+          :color="color"
+          :center-color="center"
+          :track-color="track"
           :square="true"
-          track-color="light-blue"
           class="q-ma-md"
           :bordered="false"
           :min="0"
@@ -71,10 +75,11 @@
           :value="seconds"
           :size="cardSize"
           show-value
-          :thickness="0.22"
-          color="grey-9"
+          :thickness="thick"
+          :color="color"
+          :center-color="center"
+          :track-color="track"
           :square="true"
-          track-color="light-blue"
           class="q-ma-md"
           :bordered="false"
           :min="0"
@@ -146,6 +151,10 @@ export default {
       hours: 0,
       minutes: 0,
       seconds: 0,
+      color: "blue-10",
+      track: "grey-3",
+      thick: 0.3,
+      center: "grey-3"
     };
   },
 };
