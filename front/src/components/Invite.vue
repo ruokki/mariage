@@ -1,6 +1,7 @@
 <template>
     <div id="invite" class="q-pa-md">
         <h1 class="text-center">Je viens !</h1>
+        <p class="text-body1">Saisis ici toutes les personnes qui viendront au mariage (n'oublis pas de t'inclure aussi)</p>
         <q-form>
             <div class="row">
                 <div class="col q-pa-xs">
