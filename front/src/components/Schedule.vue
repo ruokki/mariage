@@ -2,6 +2,7 @@
   <div id="schedule" class="q-pa-md">
     <h1 class="text-center md">Déroulé de la journée</h1>
     <h2 class="text-center lt-md">Déroulé de la journée</h2>
+    
     <q-timeline color="secondary">
       <q-timeline-entry
         subtitle="14h00"

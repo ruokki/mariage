@@ -1,6 +1,8 @@
 <template>
   <div id="sleep" class="q-pa-md">
-    <h1 class="text-center">O&ugrave; dormir ?</h1>
+    <h1 class="text-center md">O&ugrave; dormir</h1>
+    <h2 class="text-center lt-md">O&ugrave; dormir</h2>
+
     <section>
         <div ref="mapContainer" class="row">
             <div class="col">
@@ -11,8 +13,8 @@
             <div class="col">
                 <p class="text-h6 text-center">Gîtes et Maisons d'hôte</p>
                 <q-list>
-                    <q-item v-for="(item, index) in gites.values">
-                        <q-item-section avatar>
+                    <q-item v-for="(item, index) in gites.values" :class="itemClass">
+                        <q-item-section avatar :class="sectionClass">
                             <q-avatar :size="size" :color="gites.color" :text-color="gites.text">{{ index + 1 }}</q-avatar>
                         </q-item-section>
                         <q-item-section>
@@ -25,8 +27,8 @@
             <div class="col">
                 <p class="text-h6 text-center">Hôtels</p>
                 <q-list>
-                    <q-item v-for="(item, index) in hotel.values">
-                        <q-item-section avatar>
+                    <q-item v-for="(item, index) in hotel.values" :class="itemClass">
+                        <q-item-section avatar :class="sectionClass">
                             <q-avatar :size="size" :color="hotel.color" :text-color="hotel.text">{{ index + 1 }}</q-avatar>
                         </q-item-section>
                         <q-item-section>
@@ -42,14 +44,36 @@
 </template>
 <script>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 
 export default {
   name: "Sleep",
   components: {
     
   },
+  computed: {
+    itemClass() {
+        if(this.$q.screen.lt.md) {
+            return "column";
+        }
+
+        return "";
+    },
+    sectionClass() {
+        if(this.$q.screen.lt.md) {
+            return "items-center q-pb-sm";
+        }
+
+        return "";
+    }
+  },
   mounted() {
-    this.iframe = this.$refs.mapContainer.offsetWidth - 50 + "px";
+    this.iframe = this.$refs.mapContainer.offsetWidth + "px";
+
+    let thos = this;
+    window.addEventListener("resize", () => {
+      thos.iframe = thos.$refs.mapContainer.offsetWidth + "px";
+    });
   },
   data() {
     return {
