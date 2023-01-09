@@ -1,6 +1,8 @@
 <template>
     <div id="invite" class="q-pa-md">
-        <h1 class="text-center">Je viens !</h1>
+        <h1 class="text-center gt-sm">Je viens !</h1>
+        <h2 class="text-center lt-md">Je viens !</h2>
+
         <p class="text-body1">Saisis ici toutes les personnes qui viendront au mariage (n'oublie pas de t'inclure aussi)</p>
         <q-form>
             <div class="row">
@@ -24,24 +26,24 @@
                         text-color="black" :options="regimeValues" />
                 </div>
             </div>
-            <p :class="fullClass + ' row'">
-            <div class="col">
+            <p :class="fullClass + ' ' + direction">
+                <div class="col">
                 Des allergies/intolérances alimentaires ?
-            </div>
-            <div class="col">
-                <q-btn-toggle v-model="showAllergie" spread no-caps :toggle-color="colorUI" color="white"
-                    text-color="black" :options="[
-                        { label: 'OUI', value: true },
-                        { label: 'NON', value: false }
-                    ]" />
-            </div>
+                </div>
+                <div class="col">
+                    <q-btn-toggle v-model="showAllergie" spread no-caps :toggle-color="colorUI" color="white"
+                        text-color="black" :options="[
+                            { label: 'OUI', value: true },
+                            { label: 'NON', value: false }
+                        ]" />
+                </div>
             </p>
             <div class="row" v-if="showAllergie">
                 <div class="col q-pa-xs">
                     <q-input v-model="invite.allergie" type="textarea" />
                 </div>
             </div>
-            <p :class="fullClass + ' row'">
+            <p :class="fullClass + ' ' + direction">
             <div class="col">
                 Personne à mobilité réduite ?
             </div>
@@ -58,11 +60,13 @@
                     <q-btn :color="colorUI" label="Modifier" @click="addOne" icon="edit" />
                 </q-btn-group>
                 <q-btn-group spread v-else>
-                    <q-btn :color="colorUI" label="Ajouter un invité" @click="addOne" icon="add" />
+                    <q-btn :color="colorUI" label="Ajouter un invité à la liste" @click="addOne" icon="add" />
                 </q-btn-group>
             </div>
+
+            <!-- Desktop -->
             <q-table title="On vient :" dense :class="fullClass" :rows="listeInvite" :columns="columnInvite"
-                row-key="name" hide-bottom :pagination="pagination">
+                row-key="name" hide-bottom :pagination="pagination" v-if="$q.screen.gt.sm">
                 <template v-slot:body="props">
                     <q-tr :props="props">
                         <q-td key="size" :props="props">{{ formatSize(props.row.size) }}</q-td>
@@ -82,7 +86,31 @@
                     </q-tr>
                 </template>
             </q-table>
-            <q-btn-group :class="fullClass + ' row'" spread>
+
+            <!-- Mobile -->
+            <q-list bordered separator class="bg-white q-mt-sm" v-else>
+                <q-toolbar :class="'bg-' + colorUI + ' text-white text-center'">
+                    <q-toolbar-title>Liste des invités</q-toolbar-title>
+                </q-toolbar>
+                <q-item v-for="(item, index) in listeInvite">
+                    <q-item-section>
+                        <q-item-label class="text-bold">{{ item.nom }} {{ item.prenom }}</q-item-label>
+                        <q-item-label caption lines="1">{{ formatSize(item.size) }} - {{ formatRegime(item.regime) }}</q-item-label>
+                        <q-item-label caption lines="1">Allergies/intolérances : <span class="text-bold">{{ item.allergie == "" ? "Oui" : "Non" }}</span></q-item-label>
+                        <q-item-label caption lines="1">PMR : <span class="text-bold">{{ formatPMR(item.pmr) }}</span></q-item-label>
+                        <q-item-label class="row q-mt-sm">
+                            <div class="col text-center">
+                                <q-icon round size="sm" name="edit" :color="colorUI" @click="editInvite(index)" />
+                            </div>
+                            <div class="col text-center">
+                                <q-icon round size="sm" name="delete" :color="colorUI" @click="deleteInvite(index)" />
+                            </div>
+                        </q-item-label>
+                    </q-item-section>
+                </q-item>
+            </q-list>
+
+            <q-btn-group :class="fullClass + ' ' + direction" spread>
                 <q-btn :color="colorUI" label="Terminer et envoyer" @click="send" icon="email" />
             </q-btn-group>
         </q-form>
@@ -90,13 +118,13 @@
         <q-dialog v-model="confirm" persistent>
             <q-card>
                 <q-card-section class="row items-center">
-                <q-avatar icon="question_mark" color="primary" text-color="white" />
+                <q-avatar icon="question_mark" :color="colorUI" text-color="white" />
                 <span class="q-ml-sm">Est ce qu'on ajoute {{invite.prenom}} {{invite.nom}} à la liste des invités ?</span>
                 </q-card-section>
 
                 <q-card-actions align="right">
-                <q-btn flat label="Non" color="primary" @click="send(true)" v-close-popup />
-                <q-btn flat label="Oui" color="primary" @click="addAndSend" v-close-popup />
+                <q-btn flat label="Non" :color="colorUI" @click="send(true)" v-close-popup />
+                <q-btn flat label="Oui" :color="colorUI" @click="addAndSend" v-close-popup />
                 </q-card-actions>
             </q-card>
         </q-dialog>
@@ -111,7 +139,7 @@
                     <p>On ne t'en voudra pas ! (enfin pas trop)</p>
                 </q-card-section>
                 <q-card-actions align="right">
-                <q-btn flat label="OK" color="primary" v-close-popup />
+                <q-btn flat label="OK" :color="colorUI" v-close-popup />
                 </q-card-actions>
             </q-card>
         </q-dialog>
@@ -124,7 +152,7 @@
                     <p>Aucun invité n'a été saisi !</p>
                 </q-card-section>
                 <q-card-actions align="right">
-                <q-btn flat label="OK" color="primary" v-close-popup />
+                <q-btn flat label="OK" :color="colorUI" v-close-popup />
                 </q-card-actions>
             </q-card>
         </q-dialog>
@@ -217,6 +245,9 @@ export default {
     computed: {
         fullClass() {
             return this.textClass + " " + this.classSpace;
+        },
+        direction() {
+            return this.$q.screen.gt.sm ? "row" : "column";
         }
     },
     data() {
