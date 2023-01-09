@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <!-- Desktop -->
-    <div class="md">
+    <div class="gt-sm">
       <h1 class="text-center">15 JUILLET 2023</h1>
       <div class="row">
         <div class="col" ref="myCol">

@@ -1,6 +1,6 @@
 <template>
   <div id="sleep" class="q-pa-md">
-    <h1 class="text-center md">O&ugrave; dormir</h1>
+    <h1 class="text-center gt-sm">O&ugrave; dormir</h1>
     <h2 class="text-center lt-md">O&ugrave; dormir</h2>
 
     <section>
@@ -53,14 +53,14 @@ export default {
   },
   computed: {
     itemClass() {
-        if(this.$q.screen.lt.md) {
+        if(this.$q.screen.gt.sm) {
             return "column";
         }
 
         return "";
     },
     sectionClass() {
-        if(this.$q.screen.lt.md) {
+        if(this.$q.screen.gt.sm) {
             return "items-center q-pb-sm";
         }
 

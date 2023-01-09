@@ -1,6 +1,6 @@
 <template>
   <div id="schedule" class="q-pa-md">
-    <h1 class="text-center md">Déroulé de la journée</h1>
+    <h1 class="text-center gt-sm">Déroulé de la journée</h1>
     <h2 class="text-center lt-md">Déroulé de la journée</h2>
     
     <q-timeline color="secondary">

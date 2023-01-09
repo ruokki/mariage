@@ -9,14 +9,14 @@
         </q-toolbar-title>
         
         <!-- Desktop -->
-        <q-toolbar-title class="md">
+        <q-toolbar-title class="gt-sm">
           Pauline et Thibaut
         </q-toolbar-title>
         <q-tabs
           shrink
           indicator-color="yellow-14"
           active-color="white"
-          class="md text-grey-5"
+          class="gt-sm text-grey-5"
           v-model="activeTab"
           @click="goTo()"
         >
