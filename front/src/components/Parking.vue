@@ -87,7 +87,7 @@
       </div>
       <div class="row">
         <div class="col">
-            <p class="text-center text-body2 text-italic q-pa-none q-mb-none q-mt-md">Il est possible de payer le stationnement de surface via l'application PrestoPark</p>
+            <p class="text-center text-body2 text-italic q-pa-none q-mb-none q-mt-md">Il est possible de payer le stationnement de surface via l'application ParkNow</p>
         </div>
       </div>
     </section>
