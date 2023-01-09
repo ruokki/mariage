@@ -4,10 +4,10 @@
     <div class="gt-sm">
       <h1 class="text-center">15 JUILLET 2023</h1>
       <div class="row">
-        <div class="col" ref="myCol">
+        <div class="col" ref="desktopCol">
           <q-circular-progress
             :value="month"
-            :size="cardSize"
+            :size="cardSizeDesktop"
             show-value
             :thickness="thick"
             :color="color"
@@ -24,7 +24,7 @@
         <div class="col">
           <q-circular-progress
             :value="days"
-            :size="cardSize"
+            :size="cardSizeDesktop"
             show-value
             :thickness="thick"
             :square="true"
@@ -41,7 +41,7 @@
         <div class="col">
           <q-circular-progress
             :value="hours"
-            :size="cardSize"
+            :size="cardSizeDesktop"
             show-value
             :thickness="thick"
             :color="color"
@@ -58,7 +58,7 @@
         <div class="col">
           <q-circular-progress
             :value="minutes"
-            :size="cardSize"
+            :size="cardSizeDesktop"
             show-value
             :thickness="thick"
             :color="color"
@@ -75,7 +75,7 @@
         <div class="col">
           <q-circular-progress
             :value="seconds"
-            :size="cardSize"
+            :size="cardSizeDesktop"
             show-value
             :thickness="thick"
             :color="color"
@@ -97,10 +97,10 @@
       <h2 class="text-center">15 JUILLET 2023</h2>
 
       <div class="row">
-        <div class="col" ref="myCol">
+        <div class="col" ref="dayCol">
           <q-circular-progress
             :value="month"
-            :size="cardSize"
+            :size="cardSizeMobileHigher"
             show-value
             :thickness="thick"
             :color="color"
@@ -117,7 +117,7 @@
         <div class="col">
           <q-circular-progress
             :value="days"
-            :size="cardSize"
+            :size="cardSizeMobileHigher"
             show-value
             :thickness="thick"
             :square="true"
@@ -136,7 +136,7 @@
         <div class="col" ref="hourCol">
             <q-circular-progress
               :value="hours"
-              :size="cardSizeMobile"
+              :size="cardSizeMobileLower"
               show-value
               :thickness="thick"
               :color="color"
@@ -153,7 +153,7 @@
           <div class="col">
             <q-circular-progress
               :value="minutes"
-              :size="cardSizeMobile"
+              :size="cardSizeMobileLower"
               show-value
               :thickness="thick"
               :color="color"
@@ -170,7 +170,7 @@
           <div class="col">
             <q-circular-progress
               :value="seconds"
-              :size="cardSizeMobile"
+              :size="cardSizeMobileLower"
               show-value
               :thickness="thick"
               :color="color"
@@ -191,69 +191,47 @@
 
 <script>
 import { ref } from "vue";
+import { DateTime, Interval } from "luxon";
 
 export default {
   name: "Timer",
   components: {},
   methods: {
-    dateDiff(date_future, date_now) {
-      // get total seconds between the times
-      var delta = Math.abs(date_future - date_now) / 1000;
-      var daysPerMonth = 365 / 12;
-      // calculate (and subtract) whole months
-      var month = Math.floor(delta / (86400 * daysPerMonth));
-      delta -= month * 86400;
-
-      // calculate (and subtract) whole days
-      var days = Math.floor((delta / 86400) - (month * daysPerMonth));
-      delta -= days * 86400;
-
-      // calculate (and subtract) whole hours
-      var hours = Math.floor(delta / 3600) % 24;
-      delta -= hours * 3600;
-
-      // calculate (and subtract) whole minutes
-      var minutes = Math.floor(delta / 60) % 60;
-      delta -= minutes * 60;
-
-      // what's left is seconds
-      var seconds = Math.floor(delta % 60); // in theory the modulus is not required
-      return {
-        sec: seconds,
-        min: minutes,
-        hour: hours,
-        day: days,
-        month: month
-      }
-    },
   },
   mounted() {
-    this.cardSize = this.$refs.myCol.offsetWidth - 50 + "px";
-    this.cardSizeMobile = this.$refs.hourCol.offsetWidth - 50 + "px";
-    setInterval(() => {
-      let endDate = new Date(2023, 6, 15),
-        now = new Date(),
-        dateDiff = this.dateDiff(endDate, now);
+    this.cardSizeDesktop = this.$refs.desktopCol.offsetWidth - this.padding + "px";
+    this.cardSizeMobileHigher = this.$refs.dayCol.offsetWidth - this.padding + "px";
+    this.cardSizeMobileLower = this.$refs.hourCol.offsetWidth - ( this.padding / 2 ) + "px";
 
-      this.seconds = dateDiff.sec;
-      this.minutes = dateDiff.min;
-      this.hours = dateDiff.hour;
-      this.days = dateDiff.day;
-      this.month = dateDiff.month;
+    setInterval(() => {
+      let dateMariage = DateTime.local(2023, 7, 15, 14),
+          now = DateTime.now(),
+          diff = dateMariage.diff(now, ["months", "days", "hours", "minutes", "seconds"])
+
+      this.seconds = Math.floor(diff.seconds);
+      this.minutes = Math.floor(diff.minutes);
+      this.hours = Math.floor(diff.hours);
+      this.days = Math.floor(diff.days);
+      this.month = Math.floor(diff.months);
     }, 500);
 
     let thos = this;
     window.addEventListener("resize", () => {
-      thos.cardSize = thos.$refs.myCol.offsetWidth - 50 + "px";
-      thos.cardSizeMobile = thos.$refs.hourCol.offsetWidth - 50 + "px";
+      thos.cardSize = thos.$refs.desktopCol.offsetWidth - thos.padding + "px";
+      thos.cardSizeMobileHigher = thos.$refs.dayCol.offsetWidth - thos.padding + "px";
+      thos.cardSizeMobileLower = thos.$refs.hourCol.offsetWidth - (thos.padding / 2) + "px";
     });
   },
   data() {
     return {
-      // Taille des cercles pour desktop (et Mois, Jours en mobile)
-      cardSize: "0",
+      // Taille des cercles pour desktop
+      cardSizeDesktop: "0",
+      // Taille des cercles pour mobile (Mois, Jour)
+      cardSizeMobileHigher: "0",
       // Taille des cercles pour mobile (Heure, Minutes, Secondes)
-      cardSizeMobile: "0",
+      cardSizeMobileLower: "0",
+      // Padding pour les compteurs
+      padding: 50,
       month: 0,
       days: 0,
       hours: 0,
