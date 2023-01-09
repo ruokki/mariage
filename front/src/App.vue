@@ -1,15 +1,22 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
     <q-header class="bg-blue-10">
       <q-toolbar>
-        <q-toolbar-title>
+        <!-- Mobile -->
+        <q-btn flat round dense icon="menu" class="lt-md" @click="leftDrawerOpen = true" />
+        <q-toolbar-title class="lt-md text-center">
+          Pauline et Thibaut
+        </q-toolbar-title>
+        
+        <!-- Desktop -->
+        <q-toolbar-title class="md">
           Pauline et Thibaut
         </q-toolbar-title>
         <q-tabs
           shrink
           indicator-color="yellow-14"
           active-color="white"
-          class="text-grey-5"
+          class="md text-grey-5"
           v-model="activeTab"
           @click="goTo()"
         >
@@ -17,6 +24,14 @@
         </q-tabs>
       </q-toolbar>
     </q-header>
+
+    <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" bordered>
+      <q-list v-model="activeTab">
+        <q-item v-for="item in menu" clickable @click="drawerClick(item.name)" >
+          <q-item-section>{{ item.label }}</q-item-section>
+        </q-item>
+      </q-list>
+    </q-drawer>
 
     <q-page-container>
       <router-view></router-view>
@@ -37,15 +52,19 @@ export default {
   methods: {
     goTo() {
       if(this.$route.name === "invite") {
-         this.$router.push('/');
-         return;
+        this.$router.push('/');
+        return;
       }
-
       document.getElementById(this.activeTab).scrollIntoView({
         behavior: "smooth",
         block: "start",
         inline: "start"
       });
+    },
+    drawerClick(target) {
+      this.leftDrawerOpen = false;
+      this.tab = target;
+      this.goTo();
     }
   },
   computed: {
@@ -55,6 +74,7 @@ export default {
   },
   data() {
     return {
+      leftDrawerOpen: false,
       menu: [
         {
           name: "home",
@@ -85,10 +105,6 @@ export default {
     }
   },
 
-  setup () {
-    return {
-      
-    }
-  }
+  setup () { }
 }
 </script>
