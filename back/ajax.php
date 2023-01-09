@@ -6,6 +6,10 @@ if(count($post) > 0) {
     $separator = '|';
     $file = './result/invites.csv';
 
+    $emailBody = [
+        "De nouvelles personnes se sont inscrites pour le mariage !"
+    ];
+
     // Fichier inexistant, création de l'en-tête
     if(!file_exists($file)) {
         file_put_contents($file, implode($separator, [
@@ -29,5 +33,13 @@ if(count($post) > 0) {
             $one['allergie']
         ];
         file_put_contents($file, implode($separator, $text) . PHP_EOL, FILE_APPEND);
+
+        array_push($emailBody, '         ' . $one['nom'] . ' ' . $one['prenom']);
     }
+
+    mail(
+        'fubautsu@gmail.com',
+        'Nouveaux invites',
+        implode(PHP_EOL, $emailBody)
+    );
 }
