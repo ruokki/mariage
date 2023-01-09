@@ -92,7 +92,8 @@
       </div>
     </section>
     <section>
-      <h3>Réception</h3>
+        <h3 class="text-center gt-sm">Réception</h3>
+        <h4 class="text-center lt-md">Réception</h4>
       <p class="text-body1">La salle "L'Astragale" dispose de son parking de plus de 200 places. Il n'y aura pas à chercher de place !</p>
       <div class="row">
         <div class="col">

@@ -1,6 +1,7 @@
 <template>
   <div id="contact" class="q-pa-md">
-    <h1 class="text-center">Nous contacter</h1>
+    <h1 class="text-center gt-sm">Nous contacter</h1>
+    <h2 class="text-center lt-md">Nous contacter</h2>
     <p class="text-h6">Si vous avez des questions, besoin d'informations ou d'autres demandes concernant notre mariage, n'hésitez pas à nous contacter !</p>
     <div class="text-h6 text-center">
       <p>Pauline</p>
