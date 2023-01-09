@@ -92,7 +92,7 @@
                 <q-toolbar :class="'bg-' + colorUI + ' text-white text-center'">
                     <q-toolbar-title>Liste des invités</q-toolbar-title>
                 </q-toolbar>
-                <q-item v-for="(item, index) in listeInvite">
+                <q-item v-if="listeInvite.length > 0" v-for="(item, index) in listeInvite">
                     <q-item-section>
                         <q-item-label class="text-bold">{{ item.nom }} {{ item.prenom }}</q-item-label>
                         <q-item-label caption lines="1">{{ formatSize(item.size) }} - {{ formatRegime(item.regime) }}</q-item-label>
@@ -107,6 +107,9 @@
                             </div>
                         </q-item-label>
                     </q-item-section>
+                </q-item>
+                <q-item v-else>
+                    <q-item-label>&nbsp;</q-item-label>
                 </q-item>
             </q-list>
 
@@ -200,9 +203,17 @@ export default {
         editInvite(idx) {
             this.invite = this.listeInvite[idx];
             this.modifying = this.listeInvite[idx];
+            
+            if(this.invite.allergie !== "") {
+                this.showAllergie = true;
+            }
+            else {
+                this.showAllergie = false;
+            }
         },
         deleteInvite(idx) {
             this.listeInvite.splice(idx, 1);
+            this.modifying = null;
         },
         addAndSend() {
             this.addOne();
