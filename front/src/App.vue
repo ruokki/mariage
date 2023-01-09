@@ -25,12 +25,20 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" bordered>
-      <q-list v-model="activeTab">
-        <q-item v-for="item in menu" clickable @click="drawerClick(item.name)" >
-          <q-item-section>{{ item.label }}</q-item-section>
-        </q-item>
-      </q-list>
+    <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" bordered @hide="goTo()">
+      <q-tabs
+          shrink
+          active-bg-color="blue-10"
+          indicator-color="yellow-14"
+          active-color="white"
+          switch-indicator
+          vertical
+          class="text-black"
+          v-model="activeTab"
+          @click="goTo()"
+        >
+          <q-tab v-for="item in menu" :name="item.name" :label="item.label" @click="tab = item.name" />
+        </q-tabs>
     </q-drawer>
 
     <q-page-container>
@@ -51,6 +59,8 @@ export default {
 
   methods: {
     goTo() {
+      this.leftDrawerOpen = false;
+
       if(this.$route.name === "invite") {
         this.$router.push('/');
         return;
@@ -60,11 +70,6 @@ export default {
         block: "start",
         inline: "start"
       });
-    },
-    drawerClick(target) {
-      this.leftDrawerOpen = false;
-      this.tab = target;
-      this.goTo();
     }
   },
   computed: {
