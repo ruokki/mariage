@@ -1,5 +1,5 @@
 <template>
-    <div id="invite" class="q-pa-md">
+    <div id="invite" :class="$q.screen.lt.md ? 'q-pa-none' : 'q-pa-md'">
         <h1 class="text-center gt-sm">Je viens !</h1>
         <h2 class="text-center lt-md">Je viens !</h2>
 

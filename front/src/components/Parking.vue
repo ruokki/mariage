@@ -1,5 +1,5 @@
 <template>
-  <div id="parking" class="q-pa-md">
+  <div id="parking" :class="$q.screen.lt.md ? 'q-pa-none' : 'q-pa-md'">
     <h1 class="text-center gt-sm">Se garer</h1>
     <h2 class="text-center lt-md">Se garer</h2>
     <section>

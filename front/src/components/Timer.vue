@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div :class="$q.screen.lt.md ? 'q-pa-none' : 'q-pa-md'">
     <!-- Desktop -->
     <div class="gt-sm">
       <h1 class="text-center">15 JUILLET 2023</h1>
@@ -192,6 +192,7 @@
 <script>
 import { ref } from "vue";
 import { DateTime, Interval } from "luxon";
+import { useQuasar } from "quasar";
 
 export default {
   name: "Timer",

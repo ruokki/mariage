@@ -1,5 +1,5 @@
 <template>
-  <div id="sleep" class="q-pa-md">
+  <div id="sleep" :class="$q.screen.lt.md ? 'q-pa-none' : 'q-pa-md'">
     <h1 class="text-center gt-sm">Se loger</h1>
     <h2 class="text-center lt-md">Se loger</h2>
 

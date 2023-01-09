@@ -1,5 +1,5 @@
 <template>
-  <div id="contact" class="q-pa-md">
+  <div id="contact" :class="$q.screen.lt.md ? 'q-pa-none' : 'q-pa-md'">
     <h1 class="text-center gt-sm">Nous contacter</h1>
     <h2 class="text-center lt-md">Nous contacter</h2>
     <p class="text-h6">Si vous avez des questions, besoin d'informations ou d'autres demandes concernant notre mariage, n'hésitez pas à nous contacter !</p>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { useQuasar } from "quasar";
+
 export default {
   name: "Schedule",
   components: {},

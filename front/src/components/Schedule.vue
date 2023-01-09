@@ -1,5 +1,5 @@
 <template>
-  <div id="schedule" class="q-pa-md">
+  <div id="schedule" :class="$q.screen.lt.md ? 'q-pa-none' : 'q-pa-md'">
     <h1 class="text-center gt-sm">Déroulé de la journée</h1>
     <h2 class="text-center lt-md">Déroulé de la journée</h2>
     
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { useQuasar } from "quasar";
+
 export default {
   name: "Schedule",
   components: {},
