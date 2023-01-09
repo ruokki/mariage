@@ -1,7 +1,7 @@
 <template>
   <div id="sleep" class="q-pa-md">
-    <h1 class="text-center gt-sm">O&ugrave; dormir</h1>
-    <h2 class="text-center lt-md">O&ugrave; dormir</h2>
+    <h1 class="text-center gt-sm">Se loger</h1>
+    <h2 class="text-center lt-md">Se loger</h2>
 
     <section>
         <div ref="mapContainer" class="row">
@@ -53,14 +53,14 @@ export default {
   },
   computed: {
     itemClass() {
-        if(this.$q.screen.gt.sm) {
+        if(this.$q.screen.lt.md) {
             return "column";
         }
 
         return "";
     },
     sectionClass() {
-        if(this.$q.screen.gt.sm) {
+        if(this.$q.screen.lt.md) {
             return "items-center q-pb-sm";
         }
 

@@ -1,9 +1,12 @@
 <template>
   <div id="parking" class="q-pa-md">
-    <h1 class="text-center">O&ugrave; se garer ?</h1>
+    <h1 class="text-center gt-sm">Se garer</h1>
+    <h2 class="text-center lt-md">Se garer</h2>
     <section>
-        <h3>Parkings relais + Tram</h3>
-        <p  class="text-body1">
+        <h3 class="text-center gt-sm">Parkings relais + Tram</h3>
+        <h4 class="text-center lt-md">Parkings relais + Tram</h4>
+
+        <p class="text-body1">
             Le réseau de transports en commun de Clermont-Ferrand est gratuit le week-end et les jours fériés. Les parkings relais et de proximité sont donc tous gratuit.
             La station de tram desservant la mairie de Clermont-Ferrand est l'arrêt "Hôtel de ville".
         </p>
@@ -17,8 +20,8 @@
             <div class="col">
                 <p class="text-h6 text-center">Direction Les Vergnes</p>
                 <q-list>
-                    <q-item v-for="(item, index) in pardieu.values">
-                        <q-item-section avatar>
+                    <q-item v-for="(item, index) in pardieu.values" :class="itemClass">
+                        <q-item-section avatar :class="sectionClass">
                             <q-avatar :size="size" :color="pardieu.color" :text-color="pardieu.text">{{ index + 1 }}</q-avatar>
                         </q-item-section>
                         <q-item-section>
@@ -31,8 +34,8 @@
             <div class="col">
                 <p class="text-h6 text-center">Direction La Pardieu - Gare</p>
                 <q-list>
-                    <q-item v-for="(item, index) in vergnes.values">
-                        <q-item-section avatar>
+                    <q-item v-for="(item, index) in vergnes.values" :class="itemClass">
+                        <q-item-section avatar :class="sectionClass">
                             <q-avatar :size="size" :color="vergnes.color" :text-color="vergnes.text">{{ index + 1 }}</q-avatar>
                         </q-item-section>
                         <q-item-section>
@@ -45,7 +48,8 @@
         </div>
     </section>
     <section>
-      <h3>Parkings autour de la Mairie et de l'église</h3>
+        <h3 class="text-center gt-sm">Parkings autour de la Mairie et de l'église</h3>
+        <h4 class="text-center lt-md">Parkings autour de la Mairie et de l'église</h4>
       <div ref="mapContainer" class="row">
         <div class="col">
           <iframe src="https://www.google.com/maps/d/u/0/embed?mid=15X2bPnMotmziUOHqkCDrJzeuQNBF7C4&ehbc=2E312F" :width="iframe" :height="heightIframe"></iframe>
@@ -55,8 +59,8 @@
         <div class="col">
             <p class="text-h6 text-center">Parkings en surface</p>
           <q-list>
-            <q-item v-for="(item, index) in surface.values">
-                <q-item-section avatar>
+            <q-item v-for="(item, index) in surface.values" :class="itemClass">
+                <q-item-section avatar :class="sectionClass">
                     <q-avatar :size="size" :color="surface.color" :text-color="surface.text">{{ index + 1 }}</q-avatar>
                 </q-item-section>
                 <q-item-section>
@@ -65,13 +69,12 @@
                 </q-item-section>
             </q-item>
           </q-list>
-          <p class="text-caption">Il est possible de payer le stationnement de surface via l'application PrestoPark</p>
         </div>
         <div class="col">
             <p class="text-h6 text-center">Parkings souterrains</p>
             <q-list>
-                <q-item v-for="(item, index) in underground.values">
-                    <q-item-section avatar>
+                <q-item v-for="(item, index) in underground.values" :class="itemClass">
+                    <q-item-section avatar :class="sectionClass">
                         <q-avatar :size="size" :color="underground.color" :text-color="underground.text">{{ index + 1 }}</q-avatar>
                     </q-item-section>
                     <q-item-section>
@@ -80,6 +83,11 @@
                     </q-item-section>
                 </q-item>
             </q-list>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <p class="text-center text-body2 text-italic q-pa-none q-mb-none q-mt-md">Il est possible de payer le stationnement de surface via l'application PrestoPark</p>
         </div>
       </div>
     </section>
@@ -96,6 +104,7 @@
 </template>
 <script>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 
 export default {
   name: "Parking",
@@ -103,7 +112,23 @@ export default {
     
   },
   mounted() {
-    this.iframe = this.$refs.mapContainer.offsetWidth - 50 + "px";
+    this.iframe = this.$refs.mapContainer.offsetWidth + "px";
+  },
+  computed: {
+    itemClass() {
+        if(this.$q.screen.lt.md) {
+            return "column";
+        }
+
+        return "";
+    },
+    sectionClass() {
+        if(this.$q.screen.lt.md) {
+            return "items-center q-pb-sm";
+        }
+
+        return "";
+    }
   },
   data() {
     return {
