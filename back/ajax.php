@@ -19,7 +19,7 @@ if(count($post) > 0) {
             'Personne à mobilité réduite',
             'Régime alimentaire',
             'Allergies/Intolérances',
-            'Présent dimanche'
+            'Présent le dimanche'
         ]) . PHP_EOL, FILE_APPEND);
     }
     
