@@ -43,8 +43,49 @@
     </head>
     <body>
         <div id="q-app">
+        <q-layout view="hHh lpR fFf" class="q-pa-md">
             <q-table title="Réponses des invités" dense :rows="listeInvite" :columns="columnInvite"
                     row-key="name" hide-bottom :pagination="pagination">
+                    <template v-slot:top-row="props">
+                        <q-tr @click="updateFilter = !updateFilter" @update="updateFilter = !updateFilter">
+                            <q-td>
+                                <q-btn-toggle
+                                    v-model="filterInvite.size"
+                                    rounded
+                                    unelevated
+                                    :toggle-color="colorUI"
+                                    dense
+                                    color="white"
+                                    text-color="black"
+                                    :options="sizeValues"
+                                />
+                            </q-td>
+                            <q-td></q-td>
+                            <q-td></q-td>
+                            <q-td>
+                                <q-btn-toggle
+                                    v-model="filterInvite.regime"
+                                    rounded
+                                    unelevated
+                                    :toggle-color="colorUI"
+                                    color="white"
+                                    dense
+                                    text-color="black"
+                                    :options="regimeValues"
+                                />
+                            </q-td>
+                            <q-td></q-td>
+                            <q-td>
+                                <q-toggle v-model="filterInvite.pmr" :color="colorUI" toggle-indeterminate />
+                            </q-td>
+                            <q-td>
+                            <q-toggle v-model="filterInvite.sunday" :color="colorUI" toggle-indeterminate />
+                            </q-td>
+                        </q-tr>
+                    </template>
+                    <template v-slot:top-right="props">
+                    <q-btn label="Réinitialiser les filtres" :text-color="colorUI" unelevated @click="clearFilter" />
+                    </template>
                     <template v-slot:body="props">
                         <q-tr :props="props">
                             <q-td key="size" :props="props">{{ formatSize(props.row.size) }}</q-td>
@@ -71,10 +112,11 @@
                         </q-card-section>
 
                         <q-card-actions>
-                            <q-btn label="Valider" color="blue" class="full-width" @click="checkPwd" />
+                            <q-btn label="Valider" :color="colorUI" class="full-width" @click="checkPwd" />
                         </q-card-actions>
                     </q-card>
                 </q-dialog>
+            </q-layout>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
@@ -92,11 +134,13 @@
             data() {
                 return {
                     // Affichage de la modal pour saisir le mot de passe
-                    askPass: true,
+                    askPass: false,
                     // Mot de passe saisie
                     password: "",
                     // Mot de passe en erreur
                     pwdError: false,
+                    colorUI: "primary",
+                    updateFilter: false,
                     originalData: <?= json_encode($datas); ?>,
                     pagination: {
                         rowsPerPage: 40
@@ -158,12 +202,34 @@
                             sortable: true
                         },
                     ],
+                    filterInvite: {
+                        size: false,
+                        regime: false,
+                        pmr: null,
+                        sunday: null
+                    }
                 }
             },
             computed: {
                 listeInvite() {
+                    this.updateFilter = !this.updateFilter;
                     if(this.askPass) return [];
-                    return this.originalData;
+                    else {
+                        let filters = this.filterInvite;
+                        return this.originalData.filter(item => {
+                            if(filters.pmr == true && item.pmr !== "OUI") return false;
+                            else if(filters.pmr == false && item.pmr !== "NON") return false;
+
+                            if(filters.sunday == true && item.sunday !== "OUI") return false;
+                            else if(filters.sunday == false && !(item.sunday === "NON" || item.sunday === "")) return false;
+
+                            if(filters.size !== false && item.size != filters.size) return false;
+                            
+                            if(filters.regime !== false && item.regime != filters.regime) return false;
+
+                            return true;
+                        });
+                    }
                 }
             },
             methods: {
@@ -182,6 +248,14 @@
                         this.pwdError = true;
                         let thos = this;
                         setTimeout(() => thos.pwdError = false, 3000);
+                    }
+                },
+                clearFilter() {
+                    this.filterInvite = {
+                        size: false,
+                        regime: false,
+                        pmr: null,
+                        sunday: null
                     }
                 }
             },
