@@ -18,7 +18,8 @@ if(count($post) > 0) {
             'Adulte/Enfant',
             'Personne à mobilité réduite',
             'Régime alimentaire',
-            'Allergies/Intolérances'
+            'Allergies/Intolérances',
+            'Présent dimanche'
         ]) . PHP_EOL, FILE_APPEND);
     }
     
@@ -30,7 +31,8 @@ if(count($post) > 0) {
             $one['size'],
             $one['pmr'] ? 'OUI' : 'NON',
             $one['regime'],
-            $one['allergie']
+            $one['allergie'],
+            $post['sunday'] ? 'OUI' : 'NON'
         ];
         file_put_contents($file, implode($separator, $text) . PHP_EOL, FILE_APPEND);
 

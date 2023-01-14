@@ -113,6 +113,18 @@
                 </q-item>
             </q-list>
 
+            <p :class="fullClass + ' ' + direction">
+            <div class="col">
+                On sera présent aussi le dimanche
+            </div>
+            <div class="col">
+                <q-btn-toggle v-model="sunday" spread no-caps :toggle-color="colorUI" color="white"
+                    text-color="black" :options="[
+                        { label: 'OUI', value: true },
+                        { label: 'NON', value: false }
+                    ]" />
+            </div>
+            </p>
             <q-btn-group :class="fullClass + ' ' + direction" spread>
                 <q-btn :color="colorUI" label="Terminer et envoyer" @click="send" icon="email" />
             </q-btn-group>
@@ -240,7 +252,8 @@ export default {
                 var thos = this;
                 axios.post("./ajax.php", {
                     cmd: "new",
-                    invites: this.listeInvite
+                    invites: this.listeInvite,
+                    sunday: this.sunday
                 })
                 .then(data => {
                     thos.alertPositive = true;
@@ -265,6 +278,7 @@ export default {
         return {
             alertPositive: false,
             emptyInvite: false,
+            sunday: false,
             colorUI: "blue-10",
             textClass: "text-h5",
             classSpace: "q-mt-md",
