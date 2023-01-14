@@ -134,7 +134,7 @@
             data() {
                 return {
                     // Affichage de la modal pour saisir le mot de passe
-                    askPass: false,
+                    askPass: true,
                     // Mot de passe saisie
                     password: "",
                     // Mot de passe en erreur
