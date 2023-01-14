@@ -38,7 +38,7 @@ if(count($post) > 0) {
     }
 
     mail(
-        'fubautsu@gmail.com',
+        'fubautsu@gmail.com,bellanger.pauline1993@outlook.fr',
         'Nouveaux invites',
         implode(PHP_EOL, $emailBody)
     );
